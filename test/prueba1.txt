@@ -1,13 +1,13 @@
 ENCUESTA FRANCISCANA
 ¿Cuentan en el hogar con insumos de prevención, limpieza y desinfección suficientes?
-a) Si
-b)No
+Si
+No
 ¿Cuál o cuáles diría usted que le faltan?
-a)Barbijo
-b)Alcohol en gel
-c)Lavandina
-d)Alcohol
+Barbijo
+Alcohol en gel
+Lavandina
+Alcohol
 ¿Cuanto le tiene Miedo al Covid?
-a) Mucho
-b) Pococ
-c) Wut
+Mucho
+Pococ
+Wut

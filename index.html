@@ -95,12 +95,14 @@
             <p id="encuestaTitutlo" class="modal-card-title">Modal title</p>
             <button class="delete" aria-label="close"></button>
           </header>
+          <section class="modal-card-body"><progress id="barraProgreso" class="progress is-primary" value="15" max="100"></progress>
+          </section>
           <section id="encuestaContenido" class="modal-card-body">
             <!-- Content ... -->
           </section>
           <footer class="modal-card-foot">
-            <button id="botonSiguiente" class="button is-success">Siguiente</button>
-            <button id="botonFinalizar" class="button is-primary" disabled>Finalizar</button>
+            <button id="botonSiguiente" class="button is-success"><span>Siguiente</span><span class="icon"><i class="fas fa-arrow-right"></i></span></button>
+            <button id="botonVolverHacer" class="button is-link"><span class="icon"><i class="fas fa-check"></i></i></span><span>Hacer de Vuelta</span></button>
           </footer>
         </div>
       </div>

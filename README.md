@@ -8,13 +8,13 @@ Con el enunciado siguiente:
 4. La primer línea del archivo TXT contendrá el nombre de la encuesta. Por ejemplo:
 Encuesta COVID
 ¿Cuentan en el hogar con insumos de prevención, limpieza y desinfección suficientes?
-a) Si
-b)No
+Si
+No
 ¿Cuál o cuáles diría usted que le faltan?
-a)Barbijo
-b)Alcohol en gel
-c)Lavandina
-d)Alcohol
+Barbijo
+Alcohol en gel
+Lavandina
+Alcohol
 5. Menos la primer pregunta, el resto permanecerá oculta y se irá visualizando a medida que se vayan respondiendo las anteriores, o se podrán visualizar a gusto del usuario, por ejemplo con el efecto acordeon. Sea como sea, las preguntas no deben verse todas al mismo tiempo, sino que se deben desplegar o mostrar de a una por vez en la pantalla.
 6. La encuesta estará lista sólo una vez que se hayan respondido todas las preguntas, en este momento se habilitará el botón FINALIZAR ENCUESTA. Es decir que deberá saberse si el usuario respondió todas las preguntas o no.
 7. En caso que alguna de las respuestas posibles sea Otro, deberá habilitarse un cuadro de diálogo para que se ingrese un texto. En el archivo txt debe existir al menos una respuesta Otro para alguna de las preguntas.

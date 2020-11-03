@@ -1,7 +1,9 @@
 //variables GLOBALES para la encuesta
-var encuesta;
+var encuesta = {
+    nombre : "",
+    preguntas: []
+};
 var preguntaActual = 0;
-var respuestas= new Map();
 
 //listener del input file
 $("input:file").on('change', function () {
@@ -35,7 +37,7 @@ $('#botonTest').click(function () {
         }
         else {
             alert("La estructura del txt no es la adecuada para una encuesta");
-            reiniciar();
+            eliminarEncuesta();
             return;
         }
     };
@@ -45,31 +47,26 @@ $('#botonTest').click(function () {
 
 //metodo auxiliar que controla que el txt tenga realmente una encuesta
 function controlarEstructuraEncuesta(texto) {
-    var enc = crearEncuesta(texto);
-    if (typeof enc !== 'undefined' && enc.length > 0){
-        //seteamos la variable global con la encuesta ahora que sabemos que esta bien hecha
-        encuesta = enc;
-        return true;
-    }
-    else return false;
+     return crearEncuesta(texto);
 }
 
-//metodo auxiliar crear arreglo 2d con la encuesta
+//metodo auxiliar que lee el archivo y mete los atributos en el objeto encuesta
 function crearEncuesta(texto) {
-    var encuesta = new Array(); encuesta[0] = new Array();
-    var arrayEncuesta = texto.split('\n');
-    var nPregunta = 0;
-    for(renglon of arrayEncuesta) {
-        if(!esPregunta(renglon)) {
-            encuesta[nPregunta].push(renglon);
+    var arrayTexto = texto.split('\n');
+    encuesta.nombre = arrayTexto[0];    
+    for(var i=1;i<arrayTexto.length;i++) {        
+        if(esPregunta(arrayTexto[i])){
+            encuesta.preguntas.push({
+                titulo : arrayTexto[i],
+                opciones : [],
+                respuesta : ""
+            });            
         }
-        else {
-            encuesta.push(new Array());
-            nPregunta++;
-            encuesta[nPregunta].push(renglon);
-        }
+        else encuesta.preguntas[encuesta.preguntas.length-1].opciones.push(arrayTexto[i]);
+        console.log(encuesta.preguntas);
+        console.log("Contador actual: "+i)
     }
-    return encuesta;
+    return true;
 }
 
 //metodo auxiliar que determina si un renglon contiene una pregunta
@@ -88,58 +85,93 @@ function getArchivoDelInput() {
 }
 
 //función que reinicia el input y los botones
-function reiniciar() {
+function eliminarEncuesta() {
     $('#botonEmpezar').prop('disabled',true);
     $('#botonTest').prop('disabled',true);
     $('input:file').val("");
     $("#nombreArchivo").html("");
+    preguntaActual = 0;
+    encuesta.nombre = "";
+    encuesta.preguntas = [];
 }
 
 //funcion principal que maneja la encuesta
 function empezarEncuesta() {    
-    $('#encuestaTitutlo').html(encuesta[0][0]);
-    preguntaActual = 1;
-    var pregunta = encuesta[preguntaActual];
+    $('#encuestaTitutlo').html(encuesta.nombre);
+    var pregunta = encuesta.preguntas[preguntaActual];
     ejecutarPreguntaEncuesta(pregunta);     
 }
 
 //funcion auxiliar de la encuesta
 function ejecutarPreguntaEncuesta(pregunta) {
-    var contenido = "";
-    for(opcion of pregunta) {
-       contenido+='<label class="checkbox"> <input type="checkbox" value="'+opcion+'">'+ opcion +"</label><br>";
+    $('#barraProgreso').attr("value",100*(preguntaActual+1)/encuesta.preguntas.length);
+    var contenido = '<p class="subtitle">'+pregunta.titulo+"</p>";    
+    for(opcion of pregunta.opciones) {
+       contenido+='<label class="radio"> <input type="radio" name="radioOpciones" value="'+opcion+'"> '+ opcion +"</label><br>";
     }
-    $('#encuestaContenido').empty();
-    $('#encuestaContenido').append(contenido); 
-    if(preguntaActual<encuesta.length-1) {
-        $('#botonSiguiente').prop('disabled',false);
-        $('#botonFinalizar').prop('disabled',true);
+    $('#encuestaContenido').empty().append(contenido);
+    if(preguntaActual==encuesta.preguntas.length-1) {
+        $('#botonSiguiente').show().html("Finalizar");        
     }
     else {
-        $('#botonSiguiente').prop('disabled',true);
-        $('#botonFinalizar').prop('disabled',false);
+        $('#botonSiguiente').show().html("Siguiente")
     }
+    $('#botonVolverHacer').hide();        
+}
+
+function finalizarEncuesta() {
+    var contenido = '<p class="subtitle">Gracias por Participar!</p><p>Sus respuestas fueron las siguientes:</p>';
+    contenido+='<table class="table">';    
+    for(var i = 0;i<encuesta.preguntas.length;i++){
+        contenido+="<tr><td>"+encuesta.preguntas[i].titulo+'<span class="tag is-link is-light">';
+        contenido+=encuesta.preguntas[i].respuesta+"</span></td></tr>";
+    }
+    contenido+="</table>";
+    $('#encuestaContenido').empty().append(contenido);
+    $('#botonSiguiente').hide();
+    $('#botonVolverHacer').show();
+    
     imprimirVariables();
 }
 
 //siguiente pregunta
-$('#botonSiguiente').click(function(){
-    preguntaActual++;
-    var pregunta = encuesta[preguntaActual];
-    ejecutarPreguntaEncuesta(pregunta);
-    imprimirVariables();
+$('#botonSiguiente').click(function(){    
+    $('input[name="radioOpciones"]').each(function(){
+        if(this.checked) encuesta.preguntas[preguntaActual].respuesta = this.value;            
+    });
+    if(encuesta.preguntas[preguntaActual].respuesta != "") {        
+        preguntaActual++;
+        if(preguntaActual == encuesta.preguntas.length) finalizarEncuesta();
+        else {
+        var pregunta = encuesta.preguntas[preguntaActual];
+        ejecutarPreguntaEncuesta(pregunta);
+        }
+    }
+    else alert("Debe seleccionar una opción para poder avanzar..");  
 });
 
 //listener del boton para salir de la encuesta
 $(".delete").click(function(){
-    $("#encuesta").remove();
-    reiniciar();
+    $("#encuesta").toggle("is-active");
+    eliminarEncuesta();
 } );
 
+//listener del boton finalizar
+$('#botonVolverHacer').click(function() {
+    console.log("TODO: implementar funcion para reiniciar encuesta");
+    $("#encuesta").toggle("is-active");
+    $.wait = function( callback, seconds){
+        return window.setTimeout( callback, 2 * 1000 );
+     }
+     //reiniciamos el contador y ponemos en blanco las respuestas anteriores
+     preguntaActual = 0;
+     for(pregunta of encuesta.preguntas) pregunta.respuesta = "";
+     $("#encuesta").toggle("is-active");
+     empezarEncuesta();
+});
 
 //auxiliar
 function imprimirVariables() {
     console.log(encuesta);
     console.log("Pregunta Actual: "+preguntaActual);
-    console.log("Respuestas: "+respuestas);
 }
