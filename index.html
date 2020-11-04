@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <section class="hero is-primary is-bold">
+    <section class="hero is-info is-bold">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
@@ -32,12 +32,12 @@
           <div class="columns">
             <div class="column is-8 is-offset-2">
                 <div class="container has-text-centered is-fluid">
-                    <div class="hero is-light">
+                    <div id="dropZone" class="hero is-light">
                         <div class="hero-body">
                             <h2 class="title is-4">Cargue la Encuesta</h2>
                             <div class="column is-6 is-offset-3">
                                 <div class="field">
-                                    <div class="file is-centered is-boxed is-success has-name">
+                                    <div class="file is-centered is-boxed is-info has-name">
                                         <label class="file-label">
                                             <input id="inputArchivo" class="file-input" type="file" name="resume" accept=".txt">
                                             <span class="file-cta">
@@ -69,8 +69,8 @@
             <div class="columns">
               <div class="column is-8 is-offset-2">
                 <div class="content is-medium">
-                  <h2 class="subtitle is-5">2 de Noviembre de 2020</h2>
-                  <h1 class="title">Empecemos...</h1>
+                  <h2 class="subtitle is-6 has-text-grey">2 de Noviembre de 2020</h2>
+                  <h1 class="title">Consideraciones Generales</h1>
                   <p>Se debe cargar un archijvo de tipo .txt en el selector de arriba, el archivo debe contender
                       en la primera linea el nombre de la encuesta y a partir de la segunda linea las preguntas.
                       Adicionalmente, se debe indicar la repuesta correcta a cada pregunta con un "x".
@@ -81,9 +81,24 @@
                 </div>
               </div>
             </div>
-          </section>  
-  
-  
+          </section>
+          <section class="section">
+            <div class="columns">
+              <div class="column is-8 is-offset-2">
+                <div class="content is-medium">
+                  <h2 class="subtitle is-6 has-text-grey">3 de Noviembre de 2020</h2>
+                  <h1 class="title">Consideraciones Técnicas</h1>
+                  <p>Comentar que no se hace ningun control sobre lo bien confeccionada que esté la entrada, sino que se asume bien hecha.
+                    Siguiendo la estrucutar: linea 1 -> titulo encuesta ->lilnea 2 titulo primera pregunta -> opcines 1era pregunta -> encuestaContenido.
+                    Finalmente comentar la estrategia usada de objetos enceusta: {nombre y pregunts} y pregunta: {titulo - opciones - respuestas}
+                  </p>
+                  <p>
+                      Agregar detalles sobre como debe ser el formato del archivo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section> 
         </div>
       </div>
       
@@ -92,17 +107,16 @@
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
-            <p id="encuestaTitutlo" class="modal-card-title">Modal title</p>
+            <p id="encuestaTitutlo" class="modal-card-title"></p>
             <button class="delete" aria-label="close"></button>
           </header>
-          <section class="modal-card-body"><progress id="barraProgreso" class="progress is-primary" value="15" max="100"></progress>
+          <section class="modal-card-body"><progress id="barraProgreso" class="progress is-link" value="15" max="100"></progress>
           </section>
           <section id="encuestaContenido" class="modal-card-body">
-            <!-- Content ... -->
           </section>
           <footer class="modal-card-foot">
-            <button id="botonSiguiente" class="button is-success"><span>Siguiente</span><span class="icon"><i class="fas fa-arrow-right"></i></span></button>
-            <button id="botonVolverHacer" class="button is-link"><span class="icon"><i class="fas fa-check"></i></i></span><span>Hacer de Vuelta</span></button>
+            <button id="botonSiguiente" class="button is-link"><span>Siguiente</span><span class="icon"><i class="fas fa-arrow-right"></i></span></button>
+            <button id="botonVolverHacer" class="button is-info"><span class="icon"><i class="fas fa-check"></i></i></span><span>Hacer de Vuelta</span></button>
           </footer>
         </div>
       </div>

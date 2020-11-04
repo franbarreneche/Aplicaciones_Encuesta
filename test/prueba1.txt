@@ -1,4 +1,8 @@
 ENCUESTA FRANCISCANA
+¿Tienen Pelos en la Lengua?
+Si
+No
+Otro
 ¿Cuentan en el hogar con insumos de prevención, limpieza y desinfección suficientes?
 Si
 No
@@ -9,5 +13,9 @@ Lavandina
 Alcohol
 ¿Cuanto le tiene Miedo al Covid?
 Mucho
-Pococ
-Wut
+Poco
+Otro
+¿Cuanto le tiene Miedo la vacuna?
+Mucho
+Poco
+Otro
