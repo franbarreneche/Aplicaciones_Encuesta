@@ -31,7 +31,6 @@ $('#dropZone').on('drop',function(event){
     if(event.originalEvent.dataTransfer.files.length > 1 )
         alert("boludo no podes mas de un archivo");
     else {        
-        console.log(event.originalEvent.dataTransfer.files[0]); 
         $('#inputArchivo').prop('files',event.originalEvent.dataTransfer.files);
         manejadorCambioInputFile();
     }    
@@ -80,7 +79,10 @@ $('#botonTest').click(function () {
 
 //metodo auxiliar que controla que el txt tenga realmente una encuesta
 function controlarEstructuraEncuesta(texto) {
-     return crearEncuesta(texto);
+    crearEncuesta(texto);
+    //acá deberían ir los controles que verifiquen que el archivo está bien formado
+    //chequeando el contenido de la variable global "encuesta"
+     return true;
 }
 
 //metodo auxiliar que lee el archivo y mete los atributos en el objeto encuesta
@@ -136,6 +138,7 @@ function empezarEncuesta() {
 //funcion auxiliar de la encuesta que muestra lo relacionado con una pregunta
 function ejecutarPreguntaEncuesta(pregunta) {
     $('#barraProgreso').attr("value",100*(preguntaActual+1)/encuesta.preguntas.length);
+    $('#encuestaNumeroPregunta').html("Pregunta "+(preguntaActual+1)+" de "+encuesta.preguntas.length);
     var contenido = '<p class="subtitle">'+pregunta.titulo+"</p>";    
     for(opcion of pregunta.opciones) {
         var htmlOpcion = "";
@@ -158,7 +161,7 @@ function ejecutarPreguntaEncuesta(pregunta) {
 
 //funcion auxiliar de la encuesta que muestra un mensaje y las opciones que eligió el usuario
 function finalizarEncuesta() {
-    var contenido = '<p class="subtitle">Gracias por Participar!</p><p>Sus respuestas fueron las siguientes:</p>';
+    var contenido = '<p class="subtitle">¡Gracias por Participar!</p><p>Sus respuestas fueron las siguientes:</p>';
     contenido+='<table class="table">';    
     for(var i = 0;i<encuesta.preguntas.length;i++){
         contenido+="<tr><td>"+encuesta.preguntas[i].titulo+'<span class="tag is-link is-light">';
@@ -168,8 +171,7 @@ function finalizarEncuesta() {
     $('#encuestaContenido').empty().append(contenido);
     $('#botonSiguiente').hide();
     $('#botonVolverHacer').show();
-    
-    imprimirVariables();
+    imprimirVariables(); //comentar este metodo si no se quiere ver nada en consola
 }
 
 //listener boton siguiente pregunta
@@ -210,5 +212,5 @@ $('#botonVolverHacer').click(function() {
 //auxiliar
 function imprimirVariables() {
     console.log(encuesta);
-    console.log("Pregunta Actual: "+preguntaActual);
+    console.log("Pregunta Actual: "+(preguntaActual+1));
 }

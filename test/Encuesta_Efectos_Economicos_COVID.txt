@@ -1,0 +1,21 @@
+ENCUESTA EFECTOS ECONÓNOMICOS COVID
+¿Perdió su empleo durante la cuarentena?
+Si
+No
+¿En el hogar tuvieron que dejar de pagar algun servicio durante la cuarentena?
+Luz
+Gas
+Alquiler
+No
+Otro
+¿Tuvieron que dejar de comprar algún alimento por no tener dinero?
+Si
+No
+¿Tuvieron que dejar de comprar algún medicamento por no tener dinero?
+Si
+No
+¿Qué plan asistencial del gobierno recibieron?
+IFE
+AUH
+Ninguno
+Otro

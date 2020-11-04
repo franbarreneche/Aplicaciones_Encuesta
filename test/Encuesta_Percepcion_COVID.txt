@@ -1,0 +1,14 @@
+ENCUESTA PERCEPCIÓN SOBRE COVID
+¿Usted cree que la cuarentena obligatoria para toda la población evitará el contagio de coronavirus en su hogar?
+Si
+No
+¿Cómo diría que es el cumplimiento de la cuarentena en su Barrio?
+Alto
+Medio
+Bajo
+¿Cuales son los grupos que considera que corren mas peligro por COVID?
+Mayores de 60 años
+Diabéticos
+Personas con problemas cardíacos
+Asmáticos
+Otro
