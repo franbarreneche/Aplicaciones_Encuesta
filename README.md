@@ -1,4 +1,4 @@
-# Aplicaciones_API_DnD
+# Aplicaciones_Encuesta
 Ejercicio para la cátedra Aplicaciones I del segundo semestre del 2020 en la UPSO.
 Con el enunciado siguiente:
 
